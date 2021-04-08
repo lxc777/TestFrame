@@ -16,5 +16,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         test_view=findViewById(R.id.test);
         test_view.setID(R.raw.ic__138);
+
+    }
+    public void Test(){
+        System.out.println("测试成功");
     }
 }

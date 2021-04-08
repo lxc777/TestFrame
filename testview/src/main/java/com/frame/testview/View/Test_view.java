@@ -1,4 +1,4 @@
-package com.frame.TestFrame.View;
+package com.frame.testview.View;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -17,8 +17,7 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.core.graphics.PathParser;
 
-
-import com.frame.TestFrame.Bean.ProvinceItem;
+import com.frame.testview.Bean.ProvinceItem;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;

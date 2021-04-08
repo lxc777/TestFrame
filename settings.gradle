@@ -1,3 +1,4 @@
 rootProject.name = "TestFrame"
 include ':app'
 include ':testview'
+include ':testlibrary'

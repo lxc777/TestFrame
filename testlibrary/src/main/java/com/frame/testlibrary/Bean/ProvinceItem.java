@@ -5,15 +5,16 @@ import android.graphics.Path;
 
 
 public class ProvinceItem {
-    private Path path;
-    private String name;
-    private String fillColor;
-    private String strokeColor;
     /**
      * Color_change=0;默认阴影GREEN
      * Color_change=1；默认点击BLUE
      * Color_change=2；默认设置故障RED
      */
+    private Path path;
+    private String name;
+    private String fillColor;
+    private String strokeColor;
+
     private int Color_change;
 
     public int getColor_change() {

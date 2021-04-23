@@ -13,7 +13,7 @@ SVG模拟电路图
 	}
   
   	dependencies {
-	        implementation 'com.github.lxc777:TestFrame:v1.1'
+	        implementation 'com.github.lxc777:TestFrame:1.2'
 	}
   
   

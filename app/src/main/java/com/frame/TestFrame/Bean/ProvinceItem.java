@@ -1,4 +1,4 @@
-package com.frame.testlibrary.Bean;
+package com.frame.TestFrame.Bean;
 
 
 import android.graphics.Path;

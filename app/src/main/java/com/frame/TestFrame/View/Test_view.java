@@ -200,8 +200,6 @@ public class Test_view extends androidx.appcompat.widget.AppCompatImageView {
                 paint.setStrokeWidth(20);
                 canvas.drawPath(path, paint);
             }
-            paint.setStrokeWidth(20);
-            canvas.drawPath(path, paint);
             paint.setColor(Color.BLACK);
             paint.setStrokeWidth(2);
             canvas.drawPath(path, paint);

@@ -7,7 +7,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.frame.TestFrame.Bean.ProvinceItem;
 import com.frame.TestFrame.View.Test_view;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     Test_view test_view;
@@ -22,11 +26,11 @@ public class MainActivity extends AppCompatActivity {
         test_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name = "你好";
-                if (test_view.getOnclick_name().contains(name)) {
-//                  ...
+                if (test_view.getOnclick_name()!=null) {
+                    test_view.setColor_change(test_view.getChang_ID(),1);
+                    Toast.makeText(getApplicationContext(),""+test_view.getChang_ID(),Toast.LENGTH_SHORT).show();
                 } else {
-//                  ...
+                    Toast.makeText(getApplicationContext()," 失败 ",Toast.LENGTH_SHORT).show();
                 }
             }
         });

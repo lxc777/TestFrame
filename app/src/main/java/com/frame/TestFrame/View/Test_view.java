@@ -35,8 +35,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 public class Test_view extends androidx.appcompat.widget.AppCompatImageView {
     private String onclick_name;//点击获取的线路名称
-    private int path_num=0;//加载的Path数量
-    private int num=1;//变量
+    private int path_num = 0;//加载的Path数量
+    private int num = 1;//变量
     public int ID;//raw资源文件ID
     private int space = 10;//阴影大小
     private Path path = new Path();
@@ -50,9 +50,10 @@ public class Test_view extends androidx.appcompat.widget.AppCompatImageView {
     private String name;//标记名
     private String strokeColor;//轮廓颜色
     private String fillColor;//填充颜色
-    private int Color_change;//改变颜色变化
+    public int Color_change;//改变颜色变化
     float left = -1, top = -1, right = -1, bottom = -1;//算出当前绘制的地图的边界，用于缩放地图
-    private List<ProvinceItem> provinceItems = new ArrayList<>();//存储省的path
+    public List<ProvinceItem> provinceItems = new ArrayList<>();//存储省的path
+    public int chang_ID;
     private Canvas canvas;
     /**
      * 模板Matrix，用以初始化
@@ -90,7 +91,7 @@ public class Test_view extends androidx.appcompat.widget.AppCompatImageView {
         super.setImageBitmap(bm);
         //设置完图片后，获取该图片的坐标变换矩阵
         mMatrix.set(getImageMatrix());
-        if (num==1){
+        if (num == 1) {
             mMatrix_save.set(getImageMatrix());
             num++;
         }
@@ -121,7 +122,7 @@ public class Test_view extends androidx.appcompat.widget.AppCompatImageView {
     }
 
     /**
-     * @param raw   从资源文件读取数据
+     * @param raw 从资源文件读取数据
      */
     public void readPath(int raw) {
         new Thread(new Runnable() {
@@ -133,8 +134,8 @@ public class Test_view extends androidx.appcompat.widget.AppCompatImageView {
                     Document document = builder.parse(inputStream);
                     Element root = document.getDocumentElement();//获取根节点
                     NodeList nodeList = root.getElementsByTagName("path");
-                    path_num= nodeList.getLength();
-                    for (int i = 0; i <path_num ; i++) {
+                    path_num = nodeList.getLength();
+                    for (int i = 0; i < path_num; i++) {
                         Element element = (Element) nodeList.item(i);//path节点
                         Map<String, Path> map = new HashMap<>();
                         //获取各个省的Path
@@ -157,7 +158,7 @@ public class Test_view extends androidx.appcompat.widget.AppCompatImageView {
                         bottom = bottom == -1 ? rectF.bottom : Math.max(rectF.bottom, bottom);//取出最大的bottom
                         top = top == -1 ? rectF.top : Math.min(rectF.top, top);//取出最小的top
                     }
-                    change=-1;
+                    change = -1;
                     invalidate();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -227,14 +228,16 @@ public class Test_view extends androidx.appcompat.widget.AppCompatImageView {
             if (provinceItems.get(i).getColor_change() != 1) {
                 if (select == 1) {
                     if (rectF.contains(x, y)) {
+                        this.chang_ID = i;
                         provinceItems.get(i).setColor_change(1);
-                        onclick_name=provinceItems.get(i).getName();
+                        onclick_name = provinceItems.get(i).getName();
                         change = -1;
                         invalidate();
                         select++;
                     }
                 }
             }
+
         }
     }
 
@@ -243,6 +246,16 @@ public class Test_view extends androidx.appcompat.widget.AppCompatImageView {
      */
     public String getOnclick_name() {
         return onclick_name;
+    }
+    public int getChang_ID(){
+        return chang_ID;
+    }
+
+    public void setColor_change(int ID, int cl) {
+        provinceItems.get(ID).setColor_change(cl);
+        onclick_name = provinceItems.get(ID).getName();
+        change = -1;
+        invalidate();
     }
 
 
@@ -293,6 +306,7 @@ public class Test_view extends androidx.appcompat.widget.AppCompatImageView {
                     mMode = MODE_DRAG;
                     startPoint.set(event.getX(), event.getY());
                     isMatrixEnable();
+                    onclick_name = null;
                     onClickProvince(startPoint);
                     break;
                 case MotionEvent.ACTION_UP:
@@ -340,9 +354,9 @@ public class Test_view extends androidx.appcompat.widget.AppCompatImageView {
         }
 
 
-
         /**
          * 设置缩放Matrix
+         *
          * @param event
          */
         private void setZoomMatrix(MotionEvent event) {
@@ -368,11 +382,11 @@ public class Test_view extends androidx.appcompat.widget.AppCompatImageView {
          * @return
          */
         private float checkMaxScale(float scale, float[] values) {
-            if (scale * values[Matrix.MSCALE_X] > mMaxScale){
+            if (scale * values[Matrix.MSCALE_X] > mMaxScale) {
                 change = -1;
                 scale = mMaxScale / values[Matrix.MSCALE_X];
             }
-                mCurrentMatrix.postScale(scale, scale, getWidth() / 2, getHeight() / 2);
+            mCurrentMatrix.postScale(scale, scale, getWidth() / 2, getHeight() / 2);
             return scale;
         }
 
@@ -398,7 +412,7 @@ public class Test_view extends androidx.appcompat.widget.AppCompatImageView {
             //获取当前X轴缩放级别
             float scale = values[Matrix.MSCALE_X];
             //获取模板的X轴缩放级别，两者做比较
-             mMatrix_save.getValues(values);
+            mMatrix_save.getValues(values);
             return scale < values[Matrix.MSCALE_X];
         }
 

@@ -226,16 +226,14 @@ public class Test_view extends androidx.appcompat.widget.AppCompatImageView {
             path = provinceItems.get(i).getPath();
             path.computeBounds(rectF, true);
             rectF.set((int) rectF.left - space, (int) rectF.top - space, (int) rectF.right + space, (int) rectF.bottom + space);
-            if (provinceItems.get(i).getColor_change() != 1) {
-                if (select == 1) {
-                    if (rectF.contains(x, y)) {
-                        this.chang_ID = i;
-                        getColor=provinceItems.get(i).setColor_change(1);
-                        onclick_name = provinceItems.get(i).getName();
-                        change = -1;
-                        invalidate();
-                        select++;
-                    }
+            if (select == 1) {
+                if (rectF.contains(x, y)) {
+                    this.chang_ID = i;
+                    getColor = provinceItems.get(i).setColor_change(1);
+                    onclick_name = provinceItems.get(i).getName();
+                    change = -1;
+                    invalidate();
+                    select++;
                 }
             }
 
@@ -248,10 +246,12 @@ public class Test_view extends androidx.appcompat.widget.AppCompatImageView {
     public String getOnclick_name() {
         return onclick_name;
     }
-    public int getChang_ID(){
+
+    public int getChang_ID() {
         return chang_ID;
     }
-    public int getColor(){
+
+    public int getColor() {
         return getColor;
     }
 

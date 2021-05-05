@@ -28,7 +28,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (test_view.getOnclick_name()!=null) {
                     test_view.setColor_change(test_view.getChang_ID(),1);
-                    Toast.makeText(getApplicationContext(),""+test_view.getChang_ID(),Toast.LENGTH_SHORT).show();
+                    test_view.getColor();
+                    Toast.makeText(getApplicationContext(),""+test_view.getColor(),Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getApplicationContext()," 失败 ",Toast.LENGTH_SHORT).show();
                 }

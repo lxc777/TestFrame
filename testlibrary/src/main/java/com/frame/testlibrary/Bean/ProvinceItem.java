@@ -25,8 +25,9 @@ public class ProvinceItem {
         return Color_change;
     }
 
-    public void setColor_change(int color_change) {
+    public int setColor_change(int color_change) {
         Color_change = color_change;
+        return color_change;
     }
 
 

@@ -53,7 +53,8 @@ public class Test_view extends androidx.appcompat.widget.AppCompatImageView {
     public int Color_change;//改变颜色变化
     float left = -1, top = -1, right = -1, bottom = -1;//算出当前绘制的地图的边界，用于缩放地图
     public List<ProvinceItem> provinceItems = new ArrayList<>();//存储省的path
-    public int chang_ID;
+    public int chang_ID;//控制改变的ID
+    public int getColor;//获取当前颜色
     private Canvas canvas;
     /**
      * 模板Matrix，用以初始化
@@ -229,7 +230,7 @@ public class Test_view extends androidx.appcompat.widget.AppCompatImageView {
                 if (select == 1) {
                     if (rectF.contains(x, y)) {
                         this.chang_ID = i;
-                        provinceItems.get(i).setColor_change(1);
+                        getColor=provinceItems.get(i).setColor_change(1);
                         onclick_name = provinceItems.get(i).getName();
                         change = -1;
                         invalidate();
@@ -249,6 +250,9 @@ public class Test_view extends androidx.appcompat.widget.AppCompatImageView {
     }
     public int getChang_ID(){
         return chang_ID;
+    }
+    public int getColor(){
+        return getColor;
     }
 
     public void setColor_change(int ID, int cl) {
